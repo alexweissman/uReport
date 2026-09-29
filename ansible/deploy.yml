@@ -38,6 +38,12 @@
       ansible.builtin.command: "rsync -rl {{ ureport_install_path }}/data/ {{ ureport_site_home }}/"
       when: "release.changed"
 
+    - name: 'Configure php-fpm pool'
+      ansible.builtin.template:
+        src: 'php-fpm-pool.conf'
+        dest: "/etc/php/{{ php_version.stdout }}/fpm/pool.d/ureport.conf"
+      notify: 'php-fpm-restart'
+
     - name: "Update apache configuration"
       ansible.builtin.template:
         src:   "apache.conf"
