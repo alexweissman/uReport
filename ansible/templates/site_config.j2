@@ -78,7 +78,7 @@ $AUTHENTICATION = [
         'client_secret'  => '{{ ureport_oidc.client_secret }}',
         'claims' => [
             // uReport field => OIDC Claim
-            'username'    => 'adfs1upn',
+            'username'    => 'preferred_username',
             'displayname' => 'commonname',
             'firstname'   => 'given_name',
             'lastname'    => 'family_name',
@@ -105,7 +105,8 @@ $SOLR = [
  */
 define('NOTIFICATIONS_ENABLED', true);
 define('ADMINISTRATOR_EMAIL', '{{ apache_serveradmin }}');
-
+define('SMTP_HOST', "{{ ureport_smtp.host }}");
+define('SMTP_PORT', "{{ ureport_smtp.port }}");
 
 {% if ureport_address_service %}
 /**
